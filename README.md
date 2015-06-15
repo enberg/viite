@@ -6,7 +6,7 @@ Viite is a single class library for generating and validating finnish reference 
 
 Generate a reference number:
 ```php
-$referenceNumber = new Viite\Viite(123123);
+$referenceNumber = new Viite\Viite('123123');
 
 $referenceNumber->generate(); // Yields "1231234"
 
