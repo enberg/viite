@@ -1,6 +1,6 @@
 # Viite
 
-Viite is a single class library for generating and validating finnish reference numbers.
+Viite is a single class library for generating and validating finnish reference numbers with check digits according to the [FFI specification](https://www.fkl.fi/en/material/publications/Publications/The_reference_number_and_the_check_digit.pdf).
 
 ### Usage
 
