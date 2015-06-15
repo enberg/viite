@@ -21,6 +21,12 @@ class Viite
             );
         }
 
+        if (!is_numeric($input)) {
+            throw new InvalidArgumentException(
+                'Finnish referncenumbers can only be built from numeric strings.'
+            );
+        }
+
         $this->input = str_split($input);
     }
 
