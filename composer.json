@@ -1,6 +1,8 @@
 {
     "name": "enberg/viite",
+    "type": "library",
     "description": "A small library for generating finnish referencenumbers.",
+    "keywords": ["invoicing", "reference", "finnish"],
     "authors": [
         {
             "name": "Staffan Enberg",
