@@ -2,6 +2,8 @@
 
 namespace Viite;
 
+use InvalidArgumentException;
+
 class Viite
 {
     /**
