@@ -18,14 +18,14 @@ class Viite
     {
         if (strlen($input) < 3 || strlen($input) > 19) {
             throw new InvalidArgumentException(
-                'To generate a valid finnish referencenumber the input needs '
+                'To generate a valid finnish reference number the input needs '
                 . 'to be between 3 and 19 digits'
             );
         }
 
         if (!is_numeric($input)) {
             throw new InvalidArgumentException(
-                'Finnish referncenumbers can only be built from numeric strings.'
+                'Finnish reference numbers can only be built from numeric strings.'
             );
         }
 
@@ -71,7 +71,7 @@ class Viite
     /**
      * @return string
      */
-    public function printFormated()
+    public function printFormatted()
     {
         $parts = str_split($this->generate(), 5);
 
@@ -83,7 +83,7 @@ class Viite
      */
     public function __toString()
     {
-        return $this->printFormated();
+        return $this->printFormatted();
     }
 
     /**
