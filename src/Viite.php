@@ -93,8 +93,10 @@ class Viite
      */
     public static function validate($referenceNumber)
     {
-        $reference = new self(substr($referenceNumber, 0, -1));
+        $input = preg_replace('/\s/', '', $referenceNumber);
 
-        return (int) substr($referenceNumber, -1) === $reference->getCheckDigit();
+        $reference = new self(substr($input, 0, -1));
+
+        return (int) substr($input, -1) === $reference->getCheckDigit();
     }
 }
