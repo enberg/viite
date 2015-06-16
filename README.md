@@ -1,4 +1,4 @@
-# Viite
+# Viite [![Build Status](https://travis-ci.org/enberg/viite.svg?branch=master)](https://travis-ci.org/enberg/viite)
 
 Viite is a single class library for generating and validating finnish reference numbers with check digits according to the [FFI specification](https://www.fkl.fi/en/material/publications/Publications/The_reference_number_and_the_check_digit.pdf).
 
