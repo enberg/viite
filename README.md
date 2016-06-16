@@ -13,17 +13,18 @@ $ composer require enberg/viite
 
 Generate a reference number:
 ```php
-$referenceNumber = new Viite\Viite('123123');
+$input = '123123';
+$referenceNumber = $input . Viite\calculate_check_digit($input);
 
-$referenceNumber->generate(); // Yields "1231234"
+echo $referenceNumber; // "1231234"
 
-// Viite also graciously converts itself to a string with correct spacing
-echo $referenceNumber; // Yields "12312 34"
+// Viite also contains a function for formatting reference numbers according to finnish conventions
+echo Viite\format_reference_number($referenceNumber); // Yields "12312 34"
 ```
 
 Checking a reference number:
 ```php
-if (Viite\Viite::validate('1231234')) {
+if (Viite\check_reference_number('1231234')) {
     echo 'Yay!';
 }
 ```
