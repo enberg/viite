@@ -1,6 +1,8 @@
 <?php
 
-use Viite\Viite;
+use function Viite\calculate_check_digit;
+use function Viite\format_reference_number;
+use function Viite\check_reference_number;
 
 class ViiteTest extends PHPUnit_Framework_TestCase
 {
@@ -10,9 +12,9 @@ class ViiteTest extends PHPUnit_Framework_TestCase
      */
     public function itRejectsInvalidInput($input)
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->setExpectedException(Assert\AssertionFailedException::class);
 
-        $ref = new Viite($input);
+        calculate_check_digit($input);
     }
 
     /**
@@ -20,11 +22,11 @@ class ViiteTest extends PHPUnit_Framework_TestCase
      */
     public function badInputGenerator()
     {
-        return array(
-            array(str_repeat('1', 2)),
-            array(str_repeat('1', 20)),
-            array('123456A'),
-        );
+        return [
+            ['a parrot'],
+            ['123456A'],
+            [2.323],
+        ];
     }
 
     /**
@@ -32,19 +34,19 @@ class ViiteTest extends PHPUnit_Framework_TestCase
      */
     public function itGroupsDigitForPrint()
     {
-        $viite = new Viite('123123');
+        $viite = '1231234';
 
         $this->assertEquals(
             '12312 34',
-            $viite->printFormatted()
+            format_reference_number($viite)
         );
     }
 
     /**
      * @test
      */
-    public function itValidatesPrettyPrintedReferences()
+    public function itValidatesReferences()
     {
-        $this->assertTrue(Viite::validate('12312 34'));
+        $this->assertTrue(check_reference_number('1232'));
     }
 }
