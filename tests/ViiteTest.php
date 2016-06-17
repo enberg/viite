@@ -1,8 +1,8 @@
 <?php
 
-use function Viite\calculate_check_digit;
-use function Viite\format_reference_number;
-use function Viite\check_reference_number;
+use function Viite\generate;
+use function Viite\format;
+use function Viite\check;
 
 class ViiteTest extends PHPUnit_Framework_TestCase
 {
@@ -12,9 +12,9 @@ class ViiteTest extends PHPUnit_Framework_TestCase
      */
     public function itRejectsInvalidInput($input)
     {
-        $this->setExpectedException(Assert\AssertionFailedException::class);
+        $this->setExpectedException(InvalidArgumentException::class);
 
-        calculate_check_digit($input);
+        generate($input);
     }
 
     /**
@@ -32,13 +32,13 @@ class ViiteTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function itGroupsDigitForPrint()
+    public function itGroupsDigitsForPrint()
     {
         $viite = '1231234';
 
         $this->assertEquals(
             '12312 34',
-            format_reference_number($viite)
+            format($viite)
         );
     }
 
@@ -47,6 +47,6 @@ class ViiteTest extends PHPUnit_Framework_TestCase
      */
     public function itValidatesReferences()
     {
-        $this->assertTrue(check_reference_number('1232'));
+        $this->assertTrue(check('1232'));
     }
 }

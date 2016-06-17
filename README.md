@@ -14,17 +14,17 @@ $ composer require enberg/viite
 Generate a reference number:
 ```php
 $input = '123123';
-$referenceNumber = $input . Viite\calculate_check_digit($input);
+$referenceNumber = Viite\generate($input);
 
 echo $referenceNumber; // "1231234"
 
 // Viite also contains a function for formatting reference numbers according to finnish conventions
-echo Viite\format_reference_number($referenceNumber); // Yields "12312 34"
+echo Viite\format($referenceNumber); // Yields "12312 34"
 ```
 
 Checking a reference number:
 ```php
-if (Viite\check_reference_number('1231234')) {
+if (Viite\check('1231234')) {
     echo 'Yay!';
 }
 ```
