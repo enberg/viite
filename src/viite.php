@@ -2,11 +2,45 @@
 
 namespace Viite;
 
-use function Assert\that as assert;
+use InvalidArgumentException;
 
+/**
+ * @param mixed $input
+ * @return bool
+ */
+function validate_input_length($input) {
+    $length = strlen($input);
+    
+    return $length >= 3 && $length <= 19;
+}
+
+/**
+ * @param mixed $input
+ * @return bool
+ */
+function validate_input_integerish($input) {
+    return is_int($input) || strval(intval($input)) === $input;
+}
+
+/**
+ * @param mixed $input
+ * @return bool
+ */
+function validate_input($input) {
+    return validate_input_integerish($input) && validate_input_length($input);
+}
+
+/**
+ * @param string|int $input
+ * 
+ * @throws InvalidArgumentException
+ * 
+ * @return int
+ */
 function calculate_check_digit($input) {
-    assert($input)
-        ->integerish('Can only calculate check-digit for numeric strings.');
+    if (!validate_input_integerish($input)) {
+        throw new InvalidArgumentException("Check digits can only be calculated for integers.");
+    }
     
     $parts = str_split($input);
 
@@ -25,12 +59,35 @@ function calculate_check_digit($input) {
     return $result % 10;
 }
 
-function check_reference_number($referenceNumber) {
-    return (int) substr($referenceNumber, -1) ===
-        calculate_check_digit(substr($referenceNumber, 0, -1));
+/**
+ * @param string|int $input
+ * 
+ * @throws InvalidArgumentException
+ * 
+ * @return string
+ */
+function generate($input) {
+    if (!validate_input_length($input)) {
+        throw new InvalidArgumentException("Input must be between 3 and 19 characters to generate valid reference numbers.");
+    }
+    
+    return $input . calculate_check_digit($input);
 }
 
-function format_reference_number($referenceNumber) {
+/**
+ * @param string|int $referenceNumber
+ * @return bool
+ */
+function check($referenceNumber) {
+    $inputPart = substr($referenceNumber, 0, -1);
+    return validate_input($inputPart) && strval($referenceNumber) === generate($inputPart);
+}
+
+/**
+ * @param string|int $referenceNumber
+ * @return string
+ */
+function format($referenceNumber) {
     $parts = str_split($referenceNumber, 5);
 
     return implode(' ', $parts);

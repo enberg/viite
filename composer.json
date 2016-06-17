@@ -11,8 +11,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": ">=5.6.0",
-        "beberlei/assert": "^2.5"
+        "php": ">=5.6.0"
     },
     "autoload": {
         "files": ["src/viite.php"]
