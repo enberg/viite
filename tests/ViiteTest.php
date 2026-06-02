@@ -1,10 +1,11 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use function Viite\generate;
 use function Viite\format;
 use function Viite\check;
 
-class ViiteTest extends PHPUnit_Framework_TestCase
+class ViiteTest extends TestCase
 {
     /**
      * @test
@@ -12,7 +13,7 @@ class ViiteTest extends PHPUnit_Framework_TestCase
      */
     public function itRejectsInvalidInput($input)
     {
-        $this->setExpectedException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         generate($input);
     }
